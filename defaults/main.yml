@@ -1,0 +1,9 @@
+---
+# defaults file for bvansomeren.netdata
+
+netdata_global_options: []
+
+netdata_pythond_plugins: []
+netdata_health_alarm_notify: []
+
+netdata_aclk: "no"

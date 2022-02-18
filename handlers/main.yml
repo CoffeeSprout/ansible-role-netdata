@@ -1,0 +1,6 @@
+---
+# handlers file for bvansomeren.netdata
+- name: Restart netdata
+  service:
+    name: netdata
+    state: restarted

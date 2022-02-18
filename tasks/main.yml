@@ -1,0 +1,43 @@
+---
+# tasks file for bvansomeren.netdata
+
+- name: ensure OS specifics are included
+  include_vars: "{{ item }}"
+  with_first_found:
+  - "{{ ansible_os_family }}.yml"
+  - main.yml
+
+- name: ensure OS specific tasks are executed
+  include_tasks: "setup-{{ ansible_os_family }}.yml"
+
+- name: configure netdata.conf
+  ini_file:
+    path: "{{ netdata_conf_file }}"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items:
+  - "{{ netdata_global_options }}"
+  notify: Restart netdata
+
+- name: configure netdata python.d modules
+  template:
+    src: "{{ item }}.conf.j2"
+    dest: "/{{ netdata_pythond }}/{{ item }}.conf"
+    owner: netdata
+    group: netdata
+  with_items: "{{ netdata_pythond_plugins }}"
+
+- name: configure netdata alerting
+  lineinfile:
+    dest: "{{ netdata_health_alarm_notify_conf }}"
+    regexp: "^{{ item.option }}="
+    line: "{{ item.option }}=\"{{ item.value }}\""
+    create: yes
+  with_items: "{{ netdata_health_alarm_notify }}"
+  notify: Restart netdata
+
+- name: start netdata service
+  service:
+    name: netdata
+    state: started

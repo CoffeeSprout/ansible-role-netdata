@@ -1,0 +1,14 @@
+---
+job_name:
+  name: {{ inventory_hostname }}_haproxy    # the JOB's name as it will appear at the
+                                            # dashboard (by default is the job_name)
+                                            # JOBs sharing a name are mutually exclusive
+  update_every: {{ netdata_haproxy_update_frequency | default('1') }}         # the JOB's data collection frequency
+  priority: 60000         # the JOB's order on the dashboard
+  retries: 60             # the JOB's number of restoration attempts
+  autodetection_retry: 0  # the JOB's re-check interval in seconds
+
+via_url:
+ user : '{{ haproxy_stats_user }}'
+ pass : '{{ haproxy_stats_password }}'
+ url : 'http://127.0.0.1:9000/haproxyStats;csv;norefresh'

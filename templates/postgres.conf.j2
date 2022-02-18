@@ -1,0 +1,14 @@
+{% if netdata_postgresql_tcp %}
+tcp:
+  name: {{ netdata_postgresql_host |default('local') }}
+  database: {{ netdata_postgresql_database | default('postgres') }}
+  user: {{ netdata_postgresql_user | default('postgres') }}
+  password: {{ netdata_postgresql_password | default('postgres') }}
+  host: {{ netdata_postgresql_host | default('localhost') }}
+  post: {{ netdata_postgresql_port | default('5432') }}
+{% else %}
+socket:
+  name: {{ netdata_postgresql_host |default('local') }}
+  user: {{ netdata_postgresql_user | default('postgres') }}
+  password: {{ netdata_postgresql_password | default('postgres') }}
+{% endif %}
