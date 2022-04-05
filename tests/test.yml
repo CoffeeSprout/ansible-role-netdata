@@ -1,5 +1,14 @@
 ---
-- hosts: localhost
-  remote_user: root
+
+- hosts: centos7-lab
+  become: True
+  tasks:
+  - yum:
+      name: epel-release
+      state: present
+
+- hosts: lab
+  become: True
   roles:
-    - bvansomeren.netdata
+  - role: coffeesprout.netdata
+    netdata_bind_address: 0.0.0.0
