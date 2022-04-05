@@ -1,0 +1,27 @@
+---
+
+- name: ensure dependencies
+  package:
+    name:
+    - curl
+    - gnupg
+    - apt-transport-https
+    state: present
+
+- name: install gpg key to keyring
+  apt_key:
+    url: https://packagecloud.io/netdata/netdata/gpgkey
+    keyring: /usr/share/keyrings/netdata_netdata-archive-keyring.gpg
+    state: present
+    
+
+- name: setting up Netdata apt repo
+  apt_repository:
+    filename: netdata_netdata
+    repo: deb [signed-by=/usr/share/keyrings/netdata_netdata-archive-keyring.gpg] https://packagecloud.io/netdata/netdata/debian bullseye main
+    state: present
+
+- name: install Netdata
+  package:
+    name: netdata
+    state: present
