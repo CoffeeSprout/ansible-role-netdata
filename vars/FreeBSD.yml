@@ -1,16 +1,5 @@
 ---
 
-netdata_global_options:
-- section: global
-  option: "bind to"
-  value: "{{ netdata_bind_address | default(ansible_facts.vtnet1.ipv4[0].address)}}"
-- section: global
-  option: "enabled"
-  value: "{{ netdata_aclk }}"
-- section: web
-  option: "bind to"
-  value: "{{ netdata_bind_address | default('127.0.0.1')}}"
-
 netdata_conf_file: /usr/local/etc/netdata/netdata.conf
 netdata_health_alarm_notify_conf: /usr/local/etc/netdata/health_alarm_notify.conf
 netdata_pythond: /usr/local/etc/netdata/python.d

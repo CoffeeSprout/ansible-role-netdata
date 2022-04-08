@@ -3,6 +3,9 @@ coffeesprout.netdata
 
 Install and configure netdata for FreeBSD, RHEL based systems and Debian using the package manager.
 We disable ACLK by default
+Optionally you might want to disable  the default alarms...
+
+    netdata_enable_stock_health_configuration: "yes"
 
 Role Variables
 --------------
@@ -44,6 +47,13 @@ Including an example of how to use your role (for instance, with variables passe
          netdata_postgresql_tcp: True
          netdata_bind_address: "{{ ansible_default_ipv4.address }}"
 
+    #Simple deployment that is accessible from other than local host; Simple deployment without alarms
+    - hosts: servers
+      roles:
+      - role: coffeesprout.netdata
+        netdata_bind_address: 0.0.0.0
+        netdata_enable_stock_health_configuration: "no"
+
 License
 -------
 
@@ -53,3 +63,4 @@ Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+:

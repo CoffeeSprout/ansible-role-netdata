@@ -7,3 +7,18 @@ netdata_pythond_plugins: []
 netdata_health_alarm_notify: []
 
 netdata_aclk: "no"
+netdata_enable_stock_health_configuration: "yes"
+
+netdata_global_options:
+- section: global
+  option: "bind to"
+  value: "{{ netdata_bind_address | default('127.0.0.1')}}"
+- section: global
+  option: "enabled"
+  value: "{{ netdata_aclk }}"
+- section: web
+  option: "bind to"
+  value: "{{ netdata_bind_address | default('127.0.0.1')}}"
+- section: health
+  option: "enable stock health configuration"
+  value: "{{ netdata_enable_stock_health_configuration }}"

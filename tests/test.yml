@@ -12,3 +12,4 @@
   roles:
   - role: coffeesprout.netdata
     netdata_bind_address: 0.0.0.0
+    netdata_enable_stock_health_configuration: False
