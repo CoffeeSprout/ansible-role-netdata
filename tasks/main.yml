@@ -27,6 +27,16 @@
     owner: netdata
     group: netdata
   with_items: "{{ netdata_pythond_plugins }}"
+  notify: Restart netdata
+
+- name: configure netdata health alarms
+  template:
+    src: "health_alarm.conf.j2"
+    dest: "{{ netdata_healthd }}/{{ item.name }}.conf"
+    owner: netdata
+    group: netdata
+  with_items: "{{ netdata_health_alarms }}"
+  notify: Restart netdata
 
 - name: configure netdata alerting
   lineinfile:
@@ -41,3 +51,4 @@
   service:
     name: netdata
     state: started
+    enabled: True

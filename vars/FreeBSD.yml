@@ -3,6 +3,7 @@
 netdata_conf_file: /usr/local/etc/netdata/netdata.conf
 netdata_health_alarm_notify_conf: /usr/local/etc/netdata/health_alarm_notify.conf
 netdata_pythond: /usr/local/etc/netdata/python.d
+netdata_healthd: /usr/local/etc/netdata/health.d
 
 netdata_package:
 - netdata

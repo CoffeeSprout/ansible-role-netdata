@@ -1,0 +1,64 @@
+# {{ ansible_managed }}
+{% for rule in item.rules %}
+template: {{ rule.template }}
+on: {{ rule.on_chart }}
+{% if rule.class is defined %}
+class: {{ rule.class }}
+{% endif %}
+{% if rule.type is defined %}
+type: {{ rule.type }}
+{% endif %}
+{% if rule.component is defined %}
+component: {{ rule.component }}
+{% endif %}
+{% if rule.os is defined %}
+os: {{ rule.os }}
+{% endif %}
+{% if rule.hosts is defined %}
+hosts: {{ rule.hosts }}
+{% endif %}
+{% if rule.plugin is defined %}
+plugin: {{ rule.plugin }}
+{% endif %}
+{%if rule.module is defined %}
+module: {{ rule.module }}
+{% endif %}
+{% if rule.charts is defined %}
+charts: {{ rule.charts }}
+{% endif %}
+{% if rule.families is defined %}
+families: {{ rule.families }}
+{% endif %}
+lookup: {{ rule.lookup }}
+{% if rule.calc is defined %}
+calc: {{ rule.calc }}
+{% endif %}
+{% if rule.units is defined %}
+units: {{ rule.units }}
+{% endif %}
+{% if rule.every is defined %}
+every: {{ rule.every }}
+{% endif %}
+{% if rule.warn is defined %}
+warn: {{ rule.warn }}
+{% endif %}
+{% if rule.crit is defined %}
+crit: {{ rule.crit }}
+{% endif %}
+{% if rule.delay is defined %}
+delay: {{ rule.delay }}
+{% endif %}
+{% if rule.repeat is defined %}
+repeat: {{ rule.repeat }}
+{% endif %}
+{% if rule.options is defined %}
+options: {{ rule.options }}
+{% endif %}
+{% if rule.host_labels is defined %}
+host_labels: {{ rule.host_labels }}
+{% endif %}
+{% if rule.info is defined %}
+info: {{ rule.info }}
+{% endif %}
+to: {{ rule.to }}
+{% endfor %}

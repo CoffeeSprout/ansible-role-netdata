@@ -22,3 +22,19 @@ netdata_global_options:
 - section: health
   option: "enable stock health configuration"
   value: "{{ netdata_enable_stock_health_configuration }}"
+
+netdata_health_alarms: []
+#- name: cpu
+#  rules:
+#  - template: "10min_cpu_usage"
+#    on_chart: "system.cpu"
+#    os: "linux"
+#    hosts: "*"
+#    lookup: "average -10m unaligned of user,system,softirq,irq,guest"
+#    units: "%"
+#    every: "1m"
+#    warn: "$this > (($status >= $WARNING)  ? (75) : (85))"
+#    crit: "$this > (($status == $CRITICAL) ? (85) : (95))"
+#    delay: "down 15m multiplier 1.5 max 1h"
+#    info: "average cpu utilization for the last 10 minutes (excluding iowait, nice and steal)"
+#    to: "sysadmin"

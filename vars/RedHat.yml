@@ -3,3 +3,4 @@
 netdata_conf_file: /etc/netdata/netdata.conf
 netdata_health_alarm_notify_conf: /etc/netdata/health_alarm_notify.conf
 netdata_pythond: /etc/netdata/python.d
+netdata_healthd: /etc/netdata/health.d

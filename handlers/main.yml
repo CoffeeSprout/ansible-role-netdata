@@ -1,5 +1,5 @@
 ---
-# handlers file for bvansomeren.netdata
+# handlers file for coffeesprout.netdata
 - name: Restart netdata
   service:
     name: netdata
