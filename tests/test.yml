@@ -9,22 +9,30 @@
 
 - hosts: lab
   become: True
+  pre_tasks:
+  - include_vars:
+      dir: ../vars/health_checks
+  - set_fact:
+      netdata_health_alarms:
+      - "{{ cpu_alarms }}"
+      - "{{ ram_alarms_linux }}"
+      - "{{ ram_alarms_freebsd }}"
   roles:
   - role: coffeesprout.netdata
     netdata_bind_address: 0.0.0.0
     netdata_enable_stock_health_configuration: "no"
-    netdata_health_alarms:
-    - name: cpu
-      rules:
-      - template: "10min_cpu_usage"
-        on_chart: "system.cpu"
-        os: "linux"
-        hosts: "*"
-        lookup: "average -10m unaligned of user,system,softirq,irq,guest"
-        units: "%"
-        every: "1m"
-        warn: "$this > (($status >= $WARNING)  ? (75) : (85))"
-        crit: "$this > (($status == $CRITICAL) ? (85) : (95))"
-        delay: "down 15m multiplier 1.5 max 1h"
-        info: "average cpu utilization for the last 10 minutes (excluding iowait, nice and steal)"
-        to: "sysadmin"
+#    netdata_health_alarms:
+#    - name: cpu
+#      rules:
+#      - template: "10min_cpu_usage"
+#        on_chart: "system.cpu"
+#        os: "linux"
+#        hosts: "*"
+#        lookup: "average -10m unaligned of user,system,softirq,irq,guest"
+#        units: "%"
+#        every: "1m"
+#        warn: "$this > (($status >= $WARNING)  ? (75) : (85))"
+#        crit: "$this > (($status == $CRITICAL) ? (85) : (95))"
+#        delay: "down 15m multiplier 1.5 max 1h"
+#        info: "average cpu utilization for the last 10 minutes (excluding iowait, nice and steal)"
+#        to: "sysadmin"

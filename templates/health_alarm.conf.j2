@@ -1,6 +1,14 @@
 # {{ ansible_managed }}
+{#
+# https://learn.netdata.cloud/docs/agent/health/reference
+#}
 {% for rule in item.rules %}
+{% if rule.alarm is defined %}
+alarm: {{ rule.alarm }}
+{% endif %}
+{% if rule.template is defined %}
 template: {{ rule.template }}
+{% endif %}
 on: {{ rule.on_chart }}
 {% if rule.class is defined %}
 class: {{ rule.class }}
@@ -29,7 +37,9 @@ charts: {{ rule.charts }}
 {% if rule.families is defined %}
 families: {{ rule.families }}
 {% endif %}
+{% if rule.lookup is defined %}
 lookup: {{ rule.lookup }}
+{% endif %}
 {% if rule.calc is defined %}
 calc: {{ rule.calc }}
 {% endif %}
@@ -60,5 +70,8 @@ host_labels: {{ rule.host_labels }}
 {% if rule.info is defined %}
 info: {{ rule.info }}
 {% endif %}
+{% if rule.to is defined %}
 to: {{ rule.to }}
+{% endif %}
+
 {% endfor %}
