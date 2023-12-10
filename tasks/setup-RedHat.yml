@@ -1,18 +1,9 @@
 ---
 
-- name: setting up Netdata yum repo
-  yum_repository:
-    name: netdata_netdata
-    description: "netdata_netdata"
-    file: netdata
-    enabled: True
-    gpgcheck: False
-    baseurl: "https://packagecloud.io/netdata/netdata/el/{{ ansible_distribution_major_version }}/$basearch"
-    gpgkey: https://packagecloud.io/netdata/netdata/gpgkey
-    repo_gpgcheck: True
-    sslverify: True
-    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
-    
+- name: install netdata yum repo
+  ansible.builtin.yum:
+    name: "https://repo.netdata.cloud/repos/repoconfig/el/{{ ansible_distribution_major_version }}/x86_64/netdata-repo-2-2.noarch.rpm"
+    state: present 
 
 - name: install Netdata
   package:
